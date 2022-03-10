@@ -1,0 +1,73 @@
+09/03/2022
+figma:
+
+https://www.figma.com/file/YMM5uEW4b5Kb2QKh2OmMaa/Desafio-GloboPlay?node-id=0%3A2
+
+https://www.themoviedb.org/u/oguima
+
+
+Desafio:
+
+VER:
+https://github.com/globoi/globoplay-desafio-mobile
+
+https://www.themoviedb.org/?language=en
+https://www.themoviedb.org/documentation/api?language=en
+
+https://github.com/globoi/globoplay-desafio-mobile/tree/master/assets/icons
+
+----------------
+Enum:
+
+import Foundation
+
+public enum KidParent: Int, DescriptionEnum {
+   case FatherMother = 1
+   case LegalGuardian = 2
+   case GrandmotherGrandfather = 3
+   case OtherRelatives = 4
+   case Other = 5
+   case DontWhantToInform = 6
+
+   public var description: String {
+    switch self {
+      case .FatherMother:
+        return L10n.Kids.Parent.fatherMother
+      case .LegalGuardian:
+        return L10n.Kids.Parent.legalGuardian
+      case .GrandmotherGrandfather:
+        return L10n.Kids.Parent.grandmotherGrandfather
+      case .OtherRelatives:
+        return L10n.Kids.Parent.otherRelatives
+      case .Other:
+        return L10n.Kids.Parent.other
+      default:
+        return L10n.Kids.Parent.dontWhantToInform
+    }
+  }
+
+  static func all() -> [KidParent] {
+    return [.FatherMother, .LegalGuardian, .GrandmotherGrandfather, .OtherRelatives, .Other, .DontWhantToInform]
+  }
+}
+
+extension KidParent: Codable {
+}
+
+----------------
+Codable:
+
+import Foundation
+
+struct SignInKidPayload {
+  let globoID: String
+}
+
+extension SignInKidPayload: Codable {
+  enum CodingKeys: String, CodingKey {
+    case globoID = "globoId"
+  }
+}
+
+
+----------------
